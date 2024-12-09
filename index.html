@@ -84,14 +84,30 @@
 <div class="controls ">
     <div class="selectors" id="selectors"></div>
     <div class="buttons">
-        <button id="moveInward">+1</button>
-        <button id="moveOutward">-1</button>
-        <button id="jumpInward">+2</button>
-        <button id="jumpOutward">-2</button>
-        <button id="superInward">+3</button>
-        <button id="superOutward">-3</button>
+        <button id="moveInward">Tiene abdominales +1</button>
+        <button id="moveInward2">Usa Iphone +1</button>
+
+        <button id="moveOutward">Usa Android -1</button>
+        <button id="moveOutward2">No tiene abdominales -1</button>
+
+
+        <button id="jumpInward">Hace asados en la quinta +2</button>
+        <button id="jumpInward2">Limpia la piscina o colabora con las tareas en la quinta +2</button>
+
+        <button id="jumpOutward">Pide menta granizada -2</button>
+        <button id="jumpOutward2">No entrena ni se preocupa por su cuerpo -2</button>
+
+        <button id="superInward">Le da la razón a Liliana sin que ella se de cuenta +3</button>
+        <button id="superOutward2">Dice que si a las vacaciones familiares y se ausenta a último momento -3</button>
     </div>
 </div>
+
+
+
+
+
+
+
 
 <script>
     const canvas = document.getElementById('galaxy');
@@ -229,11 +245,22 @@
     createSelectors();
 
     document.getElementById('moveInward').addEventListener('click', () => moveSelectedPhoto(-1));
+    document.getElementById('moveInward2').addEventListener('click', () => moveSelectedPhoto(-1));
+
     document.getElementById('moveOutward').addEventListener('click', () => moveSelectedPhoto(1));
+    document.getElementById('moveOutward2').addEventListener('click', () => moveSelectedPhoto(1));
+
     document.getElementById('jumpInward').addEventListener('click', () => moveSelectedPhoto(-2));
+    document.getElementById('jumpInward2').addEventListener('click', () => moveSelectedPhoto(-2));
+
     document.getElementById('jumpOutward').addEventListener('click', () => moveSelectedPhoto(2));
+    document.getElementById('jumpOutward2').addEventListener('click', () => moveSelectedPhoto(2));
+
     document.getElementById('superInward').addEventListener('click', () => moveSelectedPhoto(-3));
+    document.getElementById('superInward2').addEventListener('click', () => moveSelectedPhoto(-3));
+
     document.getElementById('superOutward').addEventListener('click', () => moveSelectedPhoto(3));
+    document.getElementById('superOutward2').addEventListener('click', () => moveSelectedPhoto(3));
 
     window.addEventListener('resize', updateCanvasSize);
 </script>
