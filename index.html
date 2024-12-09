@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Galaxia Animada</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    canvas {
+        display: block;
+        margin-bottom: 20px;
+    }
+    .controls {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+    .selectors {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+    }
+    .square {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        border: 2px solid white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .square.selected {
+        border: 3px solid yellow;
+    }
+    button {
+        background-color: #444;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+    }
+    button:hover {
+        background-color: #666;
+    }
+</style>
+</head>
+<body>
+<canvas id="galaxy"></canvas>
+<div class="controls">
+    <div class="selectors" id="selectors"></div>
+    <div class="buttons">
+        <button id="moveInward">+1 (Acercar)</button>
+        <button id="moveOutward">-1 (Alejar)</button>
+    </div>
+</div>
+
+<script>
+    const canvas = document.getElementById('galaxy');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight * 0.7;
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+
+    const orbits = [
+        { radius: 100, color: 'rgba(0, 255, 255, 0.8)', speed: 0.02 },
+        { radius: 150, color: 'rgba(255, 0, 255, 0.8)', speed: 0.015 },
+        { radius: 200, color: 'rgba(0, 255, 0, 0.8)', speed: 0.01 },
+        { radius: 250, color: 'rgba(255, 165, 0, 0.8)', speed: 0.007 },
+        { radius: 300, color: 'rgba(255, 0, 0, 0.8)', speed: 0.005 },
+    ];
+
+    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+
+    const photos = orbits.map((_, index) => ({
+        angle: (index + 1) * Math.PI / 5,
+        size: 40,
+        orbitIndex: index,
+        color: colors[index % colors.length],
+    }));
+
+    let selectedPhotoIndex = 0; // Default selected square
+
+    function drawCenter() {
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, 60, 0, Math.PI * 2);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        ctx.closePath();
+
+        ctx.font = '20px Arial';
+        ctx.fillStyle = 'black';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('Familia Casaca', centerX, centerY);
+    }
+
+    function drawOrbits() {
+        orbits.forEach(orbit => {
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, orbit.radius, 0, Math.PI * 2);
+            ctx.strokeStyle = orbit.color;
+            ctx.lineWidth = 2;
+            ctx.setLineDash([5, 5]);
+            ctx.stroke();
+            ctx.closePath();
+        });
+    }
+
+    function drawPhotos() {
+        photos.forEach(photo => {
+            const orbit = orbits[photo.orbitIndex];
+            const x = centerX + Math.cos(photo.angle) * orbit.radius;
+            const y = centerY + Math.sin(photo.angle) * orbit.radius;
+
+            ctx.beginPath();
+            ctx.moveTo(x, y);
+            ctx.lineTo(centerX, centerY);
+            ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+            ctx.closePath();
+
+            ctx.beginPath();
+            ctx.rect(x - photo.size / 2, y - photo.size / 2, photo.size, photo.size);
+            ctx.fillStyle = photo.color;
+            ctx.fill();
+            ctx.closePath();
+        });
+    }
+
+    function updatePhotos() {
+        photos.forEach(photo => {
+            const orbit = orbits[photo.orbitIndex];
+            photo.angle += orbit.speed;
+        });
+    }
+
+    function moveSelectedPhoto(direction) {
+        const photo = photos[selectedPhotoIndex];
+        if (direction === 'inward' && photo.orbitIndex > 0) {
+            photo.orbitIndex -= 1;
+        } else if (direction === 'outward' && photo.orbitIndex < orbits.length - 1) {
+            photo.orbitIndex += 1;
+        }
+    }
+
+    function createSelectors() {
+        const selectorsContainer = document.getElementById('selectors');
+        selectorsContainer.innerHTML = ''; // Clear existing selectors
+
+        photos.forEach((photo, index) => {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            if (index === selectedPhotoIndex) square.classList.add('selected');
+            square.style.backgroundColor = photo.color;
+
+            square.addEventListener('click', () => {
+                selectedPhotoIndex = index; // Update the selected photo index
+                createSelectors(); // Refresh selectors to update selection state
+            });
+
+            selectorsContainer.appendChild(square);
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawCenter();
+        drawOrbits();
+        drawPhotos();
+        updatePhotos();
+
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+    createSelectors();
+
+    document.getElementById('moveInward').addEventListener('click', () => moveSelectedPhoto('inward'));
+    document.getElementById('moveOutward').addEventListener('click', () => moveSelectedPhoto('outward'));
+
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight * 0.7;
+    });
+</script>
+</body>
+</html>
