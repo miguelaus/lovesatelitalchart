@@ -132,6 +132,7 @@
             padding: 5px 10px;
         }
     }
+
     @keyframes neonOrbit {
         0%, 100% {
             box-shadow: 0 0 10px currentColor, 0 0 20px currentColor, 0 0 30px currentColor;
@@ -145,6 +146,7 @@
     .orbit {
         animation: neonOrbit 1.5s infinite;
     }
+    
 </style>
 </head>
 <body>
@@ -179,15 +181,15 @@
     const centerY = () => canvas.height / 2;
 
     const orbits = [
-        { radius: 60, color: 'rgba(0, 255, 255, 0.8)', speed: 0.02 },
-        { radius: 90, color: 'rgba(255, 0, 255, 0.8)', speed: 0.015 },
-        { radius: 120, color: 'rgba(0, 255, 0, 0.8)', speed: 0.01 },
-        { radius: 150, color: 'rgba(255, 165, 0, 0.8)', speed: 0.007 },
-        { radius: 180, color: 'rgba(255, 0, 0, 0.8)', speed: 0.005 },
-        { radius: 210, color: 'rgba(173, 216, 230, 0.8)', speed: 0.004 },
-        { radius: 240, color: 'rgba(144, 238, 144, 0.8)', speed: 0.003 },
-        { radius: 270, color: 'rgba(255, 192, 203, 0.8)', speed: 0.002 },
-        { radius: 300, color: 'rgba(128, 0, 128, 0.8)', speed: 0.001 },
+        { radius: 60, color: 'rgba(0, 255, 255, 0.8)', speed: 0.1 },
+        { radius: 90, color: 'rgba(255, 0, 255, 0.8)', speed: 0.075 },
+        { radius: 120, color: 'rgba(0, 255, 0, 0.8)', speed: 0.05 },
+        { radius: 150, color: 'rgba(255, 165, 0, 0.8)', speed: 0.025 },
+        { radius: 180, color: 'rgba(255, 0, 0, 0.8)', speed: 0.0125 },
+        { radius: 210, color: 'rgba(173, 216, 230, 0.8)', speed: 0.00625 },
+        { radius: 240, color: 'rgba(144, 238, 144, 0.8)', speed: 0.003125 },
+        { radius: 270, color: 'rgba(255, 192, 203, 0.8)', speed: 0.0015625 },
+        { radius: 300, color: 'rgba(128, 0, 128, 0.8)', speed: 0.00078125 },
     ];
 
     const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
