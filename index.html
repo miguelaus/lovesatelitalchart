@@ -13,17 +13,23 @@
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        font-family: Arial, sans-serif;
     }
+
     canvas {
         display: block;
         margin-bottom: 20px;
     }
+
     .controls {
         display: flex;
         flex-direction: column;
         align-items: center;
-        max-width: 100%;
+        width: 100%;
+        padding: 10px;
+        box-sizing: border-box;
     }
+
     .buttons {
         display: flex;
         gap: 10px;
@@ -31,6 +37,7 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .selectors {
         display: flex;
         gap: 10px;
@@ -38,6 +45,7 @@
         flex-wrap: wrap;
         justify-content: center;
     }
+
     .circle {
         width: 40px;
         height: 40px;
@@ -48,72 +56,87 @@
         align-items: center;
         justify-content: center;
     }
+
     .circle.selected {
         border: 3px solid yellow;
     }
+
     button {
         background-color: #444;
         color: white;
         border: none;
-        padding: 10px 20px;
+        padding: 8px 16px;
         cursor: pointer;
-        font-size: 14px;
+        font-size: 1rem;
         border-radius: 5px;
+        text-align: center;
     }
+
     button:hover {
         background-color: #666;
     }
-    .menu-item-84, .menu-item-85 {
-    animation: neonefecto 1s infinite;
+
+    @media (max-width: 768px) {
+        .circle {
+            width: 30px;
+            height: 30px;
+        }
+
+        button {
+            font-size: 0.875rem;
+            padding: 6px 12px;
+        }
+
+        .buttons {
+            gap: 5px;
+        }
+
+        .controls {
+            padding: 5px;
+        }
     }
+
+    @media (max-width: 480px) {
+        .circle {
+            width: 20px;
+            height: 20px;
+        }
+
+        button {
+            font-size: 0.75rem;
+            padding: 5px 10px;
+        }
+    }
+
     @keyframes neonefecto {
-    50% {
-        text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+        50% {
+            text-shadow: 0 0 10px #00ff00, 0 0 20px #00ff00, 0 0 30px #00ff00;
+        }
     }
-    }
-    .menu-item-86, .menu-item-87 {
-    animation: neonefecto 1s infinite;
-    color: white;
-    background-color: #080808;
-    }
-    
 </style>
 </head>
 <body>
 <canvas id="galaxy"></canvas>
-<div class="controls ">
+<div class="controls">
     <div class="selectors" id="selectors"></div>
     <div class="buttons">
         <button id="moveInward">Tiene abdominales +1</button>
         <button id="moveInward2">Usa Iphone +1</button>
-
         <button id="moveOutward">Usa Android -1</button>
         <button id="moveOutward2">No tiene abdominales -1</button>
-
-
         <button id="jumpInward">Hace asados en la quinta +2</button>
-        <button id="jumpInward2">Limpia la piscina o colabora con las tareas en la quinta +2</button>
-
+        <button id="jumpInward2">Limpia la piscina o colabora +2</button>
         <button id="jumpOutward">Pide menta granizada -2</button>
-        <button id="jumpOutward2">No entrena ni se preocupa por su cuerpo -2</button>
-
-        <button id="superInward">Le da la razón a Liliana sin que ella se de cuenta +3</button>
-        <button id="superOutward2">Dice que si a las vacaciones familiares y se ausenta a último momento -3</button>
+        <button id="jumpOutward2">No entrena ni se preocupa -2</button>
+        <button id="superInward">Le da la razón +3</button>
+        <button id="superOutward2">Se ausenta a último momento -3</button>
     </div>
 </div>
-
-
-
-
-
-
-
 
 <script>
     const canvas = document.getElementById('galaxy');
     const ctx = canvas.getContext('2d');
 
-    // Fullscreen responsive setup
     const updateCanvasSize = () => {
         canvas.width = window.innerWidth;
         canvas.height = window.innerHeight * 0.8;
@@ -147,19 +170,17 @@
     let selectedPhotoIndex = 0;
 
     function drawCenter() {
-        // Central solid yellow circle
         ctx.beginPath();
         ctx.arc(centerX(), centerY(), 60, 0, Math.PI * 2);
         ctx.fillStyle = 'black';
         ctx.fill();
         ctx.closePath();
 
-        // Text inside the central circle
         ctx.font = '15px Arial';
         ctx.fillStyle = 'Yellow';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
-        ctx.fillText('       Casaca Family       ', centerX(), centerY());
+        ctx.fillText('Casaca Family', centerX(), centerY());
     }
 
     function drawOrbits() {
@@ -257,9 +278,6 @@
     document.getElementById('jumpOutward2').addEventListener('click', () => moveSelectedPhoto(2));
 
     document.getElementById('superInward').addEventListener('click', () => moveSelectedPhoto(-3));
-    document.getElementById('superInward2').addEventListener('click', () => moveSelectedPhoto(-3));
-
-    document.getElementById('superOutward').addEventListener('click', () => moveSelectedPhoto(3));
     document.getElementById('superOutward2').addEventListener('click', () => moveSelectedPhoto(3));
 
     window.addEventListener('resize', updateCanvasSize);
