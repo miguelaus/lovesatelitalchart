@@ -146,7 +146,6 @@
     .orbit {
         animation: neonOrbit 1.5s infinite;
     }
-    
 </style>
 </head>
 <body>
@@ -161,9 +160,13 @@
         <button id="jumpInward">Hace asados en la quinta +2</button>
         <button id="jumpInward2">Limpia la piscina o colabora +2</button>
         <button id="jumpOutward">Pide menta granizada -2</button>
-        <button id="jumpOutward2">No entrena ni se preocupa -2</button>
-        <button id="superInward">Le da la razón +3</button>
-        <button id="superOutward2">Se ausenta a último momento -3</button>
+        <button id="jumpOutward2">No entrena ni se preocupa por su cuerpo -2</button>
+        <button id="superInward3">Le da la razón a Lili +3</button>
+        <button id="superOutward3">No le gusta los animales -3</button>
+        <button id="magicInward4">Ama los perros +4</button>
+        <button id="magicOutward4">Contradecir a Lili -4</button>
+        
+    
     </div>
 </div>
 
@@ -173,7 +176,7 @@
 
     const updateCanvasSize = () => {
         canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight * 0.6; // Reducimos el canvas para permitir ver los botones
+        canvas.height = window.innerHeight * 0.8; // Reducimos el canvas para permitir ver los botones
     };
     updateCanvasSize();
 
@@ -192,13 +195,15 @@
         { radius: 300, color: 'rgba(128, 0, 128, 0.8)', speed: 0.00078125 },
     ];
 
-    const colors = ['red', 'blue', 'green', 'yellow', 'purple'];
+    const colors = ['red', 'blue', 'green', 'purple', 'grey'];
+    const names = ['Martin', 'Leo', 'Zoe', 'Rodri', 'Vero'];  // Nombres asociados a los colores
 
     const photos = Array(5).fill(null).map((_, index) => ({
         angle: (index + 1) * Math.PI / 5,
-        size: 30,
+        size: 60,
         orbitIndex: index % orbits.length,
         color: colors[index % colors.length],
+        name: names[index],  // Asocia el nombre al color
     }));
 
     let selectedPhotoIndex = 0;
@@ -251,6 +256,13 @@
             ctx.fillStyle = photo.color;
             ctx.fill();
             ctx.closePath();
+
+            // Dibuja el nombre sobre la bola
+            ctx.font = '15px Arial';
+            ctx.fillStyle = 'white';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(photo.name, x, y);  // Dibuja el nombre
         });
     }
 
@@ -314,10 +326,18 @@
     document.getElementById('jumpOutward').addEventListener('click', () => moveSelectedPhoto(2));
     document.getElementById('jumpOutward2').addEventListener('click', () => moveSelectedPhoto(2));
 
-    document.getElementById('superInward').addEventListener('click', () => moveSelectedPhoto(-3));
-    document.getElementById('superOutward2').addEventListener('click', () => moveSelectedPhoto(3));
+    document.getElementById('superInward3').addEventListener('click', () => moveSelectedPhoto(-3));
+    document.getElementById('superOutward3').addEventListener('click', () => moveSelectedPhoto(3));
+
+    document.getElementById('magicInward4').addEventListener('click', () => moveSelectedPhoto(-4));
+    document.getElementById('magicOutward4').addEventListener('click', () => moveSelectedPhoto(4));
+
 
     window.addEventListener('resize', updateCanvasSize);
+
+
+    
+
 </script>
 </body>
 </html>
