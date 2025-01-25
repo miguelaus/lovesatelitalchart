@@ -361,7 +361,35 @@ h2, p {
         });
     }
 
-    
+    function createSelectors() {
+    const selectorsContainer = document.getElementById('selectors');
+    selectorsContainer.innerHTML = '';  // Limpiar los selectores previos
+
+    photos.forEach((photo, index) => {
+        const circle = document.createElement('div');
+        circle.classList.add('circle');
+        if (index === selectedPhotoIndex) circle.classList.add('selected');
+        circle.style.backgroundColor = photo.color;
+
+        // Crear el texto dentro del selector (puede ser el nombre o cualquier texto relacionado)
+        const text = document.createElement('span');
+        text.textContent = photo.name;  // Usamos el nombre del planeta, pero puedes cambiarlo
+        text.style.color = 'white';  // Asegúrate de que el texto sea visible
+        text.style.fontSize = '12px'; // Ajusta el tamaño del texto
+
+        // Agregar el texto al selector
+        circle.appendChild(text);
+
+        // Event listener para cambiar la selección al hacer clic
+        circle.addEventListener('click', () => {
+            selectedPhotoIndex = index;
+            createSelectors(); // Actualiza los selectores con la nueva selección
+        });
+
+        selectorsContainer.appendChild(circle);
+    });
+}
+
 
     
     function animate() {
