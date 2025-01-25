@@ -17,10 +17,9 @@
     }
 
     canvas {
-        display: block;
-        margin-bottom: 20px;
-    }
-
+    display: block;
+    margin-bottom: 5%; /* Reducir el margen inferior */
+}   
     .controls {
         display: flex;
         flex-direction: column;
@@ -59,7 +58,7 @@
     }
 
     .circle.selected {
-        border: 3px solid yellow;
+        border: 0.5px solid rgb(0, 0, 0);
     }
 
     button {
@@ -72,21 +71,21 @@
         border-radius: 5px;
         text-align: center;
         transition: all 0.3s ease-in-out;
-        box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+        box-shadow: 0 0 10px #00ffcc, 0 0 10px #00ffcc, 0 0 30px #00ffcc;
     }
 
     button:hover {
         background-color: #003333;
         color: #00ffcc;
-        box-shadow: 0 0 20px #00ffcc, 0 0 30px #00ffcc, 0 0 40px #00ffcc;
+        box-shadow: 0 0 20px #00ffcc, 0 0 20px #00ffcc, 0 0 40px #00ffcc;
     }
 
     @keyframes neonGlow {
         0%, 100% {
-            box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc, 0 0 30px #00ffcc;
+            box-shadow: 0 0 10px #00ffcc, 0 0 10px #00ffcc, 0 0 30px #00ffcc;
         }
         50% {
-            box-shadow: 0 0 20px #00ffaa, 0 0 30px #00ffaa, 0 0 50px #00ffaa;
+            box-shadow: 0 0 20px #00ffaa, 0 0 20px #00ffaa, 0 0 50px #00ffaa;
         }
     }
 
@@ -206,27 +205,31 @@ h2, p {
 
     <div class="selectors" id="selectors"></div>
 
+    <div class="controls">
+    
+        <div class="buttons">
+            <button id="moveInward">Tiene abdominales +1</button>
+            <button id="moveInward2">Usa Iphone +1</button>
+            <button id="moveOutward">Usa Android -1</button>
+            <button id="moveOutward2">No tiene abdominales -1</button>
+            <button id="jumpInward">Hace asados en la quinta +2</button>
+            <button id="jumpInward2">Limpia la piscina o colabora +2</button>
+            <button id="jumpOutward">Pide menta granizada -2</button>
+            <button id="jumpOutward2">No entrena ni se preocupa por su cuerpo -2</button>
+            <button id="superInward3">Le da la razón a Lili +3</button>
+            <button id="superOutward3">No le gusta los animales -3</button>
+            <button id="magicInward4">Ama los perros +4</button>
+            <button id="magicOutward4">Contradecir a Lili -4</button>
+            
+        
+        </div>
+    </div>
+
+
+
+
 <canvas id="galaxy"></canvas>
 
-<div class="controls">
-    
-    <div class="buttons">
-        <button id="moveInward">Tiene abdominales +1</button>
-        <button id="moveInward2">Usa Iphone +1</button>
-        <button id="moveOutward">Usa Android -1</button>
-        <button id="moveOutward2">No tiene abdominales -1</button>
-        <button id="jumpInward">Hace asados en la quinta +2</button>
-        <button id="jumpInward2">Limpia la piscina o colabora +2</button>
-        <button id="jumpOutward">Pide menta granizada -2</button>
-        <button id="jumpOutward2">No entrena ni se preocupa por su cuerpo -2</button>
-        <button id="superInward3">Le da la razón a Lili +3</button>
-        <button id="superOutward3">No le gusta los animales -3</button>
-        <button id="magicInward4">Ama los perros +4</button>
-        <button id="magicOutward4">Contradecir a Lili -4</button>
-        
-    
-    </div>
-</div>
 
 <script>
     const canvas = document.getElementById('galaxy');
@@ -242,15 +245,15 @@ h2, p {
     const centerY = () => canvas.height / 2;
 
     const orbits = [
-        { radius: 60, color: 'rgba(0, 255, 255, 0.8)', speed: 0.009 },
-        { radius: 90, color: 'rgba(255, 0, 255, 0.8)', speed: 0.007 },
-        { radius: 120, color: 'rgba(0, 255, 0, 0.8)', speed: 0.006 },
-        { radius: 150, color: 'rgba(255, 165, 0, 0.8)', speed: 0.005 },
-        { radius: 180, color: 'rgba(255, 0, 0, 0.8)', speed: 0.004 },
-        { radius: 210, color: 'rgba(173, 216, 230, 0.8)', speed: 0.003 },
-        { radius: 240, color: 'rgba(144, 238, 144, 0.8)', speed: 0.002 },
-        { radius: 270, color: 'rgba(255, 192, 203, 0.8)', speed: 0.001 },
-        { radius: 300, color: 'rgba(128, 0, 128, 0.8)', speed: 0.0005 },
+        { radius: 40, color: 'rgba(0, 255, 255, 0.8)', speed: 0.009, },
+        { radius: 60, color: 'rgba(255, 0, 255, 0.8)', speed: 0.007 },
+        { radius: 80, color: 'rgba(0, 255, 0, 0.8)', speed: 0.006 },
+        { radius: 100, color: 'rgba(255, 165, 0, 0.8)', speed: 0.005 },
+        { radius: 120, color: 'rgba(255, 0, 0, 0.8)', speed: 0.004 },
+        { radius: 140, color: 'rgba(173, 216, 230, 0.8)', speed: 0.003 },
+        { radius: 160, color: 'rgba(144, 238, 144, 0.8)', speed: 0.002 },
+        { radius: 180, color: 'rgba(255, 192, 203, 0.8)', speed: 0.001 },
+        { radius: 200, color: 'rgba(128, 0, 128, 0.8)', speed: 0.0005 },
     ];
 
     const colors = ['red', 'blue', 'green', 'purple', 'grey'];
@@ -273,7 +276,7 @@ h2, p {
         ctx.fill();
         ctx.closePath();
 
-        ctx.font = '15px Arial';
+        ctx.font = '10px Arial';
         ctx.fillStyle = 'Yellow';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
