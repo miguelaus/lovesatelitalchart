@@ -89,10 +89,7 @@
         }
     }
 
-    button {
-        animation: neonGlow 1.5s infinite;
-    }
-
+    
     @media (max-width: 768px) {
         canvas {
             height: 60vh; /* Ajustar la galaxia para pantallas medianas */
@@ -119,12 +116,12 @@
 
     @media (max-width: 480px) {
         canvas {
-            height: 50vh; /* Ajustar aún más para pantallas pequeñas */
+            height: 50%; /* Ajustar aún más para pantallas pequeñas */
         }
 
         .circle {
-            width: 20px;
-            height: 20px;
+            width: 50%;
+            height: 50%;
         }
 
         button {
@@ -146,9 +143,50 @@
     .orbit {
         animation: neonOrbit 1.5s infinite;
     }
+
+    /* Estilos para la ventana modal */
+.modal {
+    display: none; /* Oculta la ventana inicialmente */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: black;
+    border: 2px solid white; /* Bordes blancos */
+    border-radius: 15px; /* Bordes redondeados */
+    padding: 20px;
+    text-align: center;
+    color: white;
+    font-family: Arial, sans-serif;
+    max-width: 400px;
+    width: 80%;
+}
+
+h2, p {
+    margin: 0;
+    padding: 10px 0;
+}
+
 </style>
 </head>
 <body>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <h2>¡Encuentra tu lugar en el Universo!</h2>
+            <p></p>
+        </div>
+    </div>
+
+
 <canvas id="galaxy"></canvas>
 <div class="controls">
     <div class="selectors" id="selectors"></div>
@@ -336,7 +374,17 @@
     window.addEventListener('resize', updateCanvasSize);
 
 
-    
+    function showModal() {
+    const modal = document.getElementById('modal');
+    modal.style.display = 'flex'; // Muestra la ventana modal
+
+    // Cerrar la ventana después de 5 segundos
+    setTimeout(() => {
+        modal.style.display = 'none'; // Oculta la ventana modal
+    }, 8000); // 5000ms = 5 segundos
+}
+
+window.onload = showModal;
 
 </script>
 </body>
