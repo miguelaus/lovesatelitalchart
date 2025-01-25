@@ -217,11 +217,12 @@ h2, p {
             <button id="jumpOutward">Pide menta granizada -2</button>
             <button id="jumpOutward2">No entrena ni se preocupa por su cuerpo -2</button>
             <button id="superInward3">Le da la razón a Lili +3</button>
-            <button id="superOutward3">No le gusta los animales -3</button>
-            <button id="magicInward4">Ama los perros +4</button>
+            <button id="superOutward3">No le gusta los animales -1</button>
+            <button id="magicInward4">Ama los perros +1</button>
             <button id="magicOutward4">Contradecir a Lili -4</button>
+            <button id="alcoholOutward">Bebe alcohol -1</button>
+            <button id="llavesOutward">Ha hecho copias de llaves de chorroarin -1</button>
             
-        
         </div>
     </div>
 
@@ -262,7 +263,7 @@ h2, p {
     const photos = Array(5).fill(null).map((_, index) => ({
         angle: (index + 1) * Math.PI / 5,
         size: 60,
-        orbitIndex: 4,
+        orbitIndex: 6,
         color: colors[index % colors.length],
         name: names[index],  // Asocia el nombre al color
     }));
@@ -419,11 +420,13 @@ h2, p {
     document.getElementById('jumpOutward2').addEventListener('click', () => moveSelectedPhoto(2));
 
     document.getElementById('superInward3').addEventListener('click', () => moveSelectedPhoto(-3));
-    document.getElementById('superOutward3').addEventListener('click', () => moveSelectedPhoto(3));
+    document.getElementById('superOutward3').addEventListener('click', () => moveSelectedPhoto(1));
 
-    document.getElementById('magicInward4').addEventListener('click', () => moveSelectedPhoto(-4));
+    document.getElementById('magicInward4').addEventListener('click', () => moveSelectedPhoto(-1));
     document.getElementById('magicOutward4').addEventListener('click', () => moveSelectedPhoto(4));
 
+    document.getElementById('alcoholOutward').addEventListener('click', () => moveSelectedPhoto(1));
+    document.getElementById('llavesOutward').addEventListener('click', () => moveSelectedPhoto(1));
 
     window.addEventListener('resize', updateCanvasSize);
 
